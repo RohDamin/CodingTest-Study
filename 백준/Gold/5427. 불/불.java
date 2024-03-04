@@ -20,7 +20,7 @@ public class Main {
             map = new char[h][w];
             fire = new LinkedList<>();
             person = new LinkedList<>();
-            
+
             for(int i=0; i<h; i++) {
                 String line = br.readLine();
                 for(int j=0; j<w; j++) {
@@ -39,7 +39,7 @@ public class Main {
                 for(int i=0; i<fSize; i++) {
                     int[] pos = fire.poll();
                     int px = pos[0], py = pos[1];
-                    fireMarking(px, py);
+                    fire(px, py);
                 }
 
                 int pSize = person.size();
@@ -61,30 +61,35 @@ public class Main {
 
     }
 
-    static int escape(int x, int y, int time) {
-        for(int i=0; i<4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            if(nx<0 || nx>w-1 || ny<0 || ny>h-1) {
-                return time+1;
-            }
 
-            if(map[ny][nx] == '.') {
-                map[ny][nx] = '@';
-                person.add(new int[] {nx, ny, time+1});
+    static int escape(int x, int y, int time) {
+        for (int i = 0; i<4; i++) {
+            int nextX = x + dx[i];
+            int nextY = y + dy[i];
+
+            if (nextX < 0 || nextY < 0 || nextY > h-1 || nextX > w-1) { // 출구를 찾은 경우
+                return time+1; // 최단시간 리턴
+            }
+            if (map[nextY][nextX] == '.') { // 통로인 경우
+                map[nextY][nextX] = '@'; // 위치 변경
+                person.add(new int[] {nextX, nextY, time+1}); // 큐에 방문한 노드를 삽입, 현재 최단시간+1
             }
         }
-        return -1;
+        return -1; // 루프가 모두 끝난 경우 -1 리턴 > 탈출이 불가한 경우
     }
 
-    static void fireMarking(int x, int y) {
-        for(int i=0; i<4; i++) {
-            int nx = x+dx[i];
-            int ny = y+dy[i];
-            if(nx<0 || nx>w-1 || ny<0 || ny>h-1) continue;
-            if(map[ny][nx] == '.' || map[ny][nx] == '@') {
-                map[ny][nx] = '*';
-                fire.add(new int[] {nx,ny});
+    static void fire(int x, int y) {
+        for (int i = 0; i<4; i++) {
+            int nextX = x + dx[i];
+            int nextY = y + dy[i];
+
+            if (nextX < 0 || nextY < 0 || nextY > h-1 || nextX > w-1) {
+                continue;
+            }
+
+            if (map[nextY][nextX] == '.' || map[nextY][nextX] == '@') { // 인접 노드가 통로인 경우
+                fire.add(new int[] {nextX, nextY}); // 큐에 방문한 노드 삽입
+                map[nextY][nextX] = '*'; // 불로 변경
             }
         }
     }
