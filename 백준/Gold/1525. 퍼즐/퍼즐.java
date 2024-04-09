@@ -1,3 +1,4 @@
+// bfs + string
 import java.io.*;
 import java.util.*;
 
@@ -37,12 +38,12 @@ public class Main {
             if (pos.equals(correct)) return move;
 
             for (int i = 0; i<4; i++) {
-                int nx = px+dx[i];
-                int ny = py+dy[i];
+                int nx = px + dx[i];
+                int ny = py + dy[i];
 
                 if (!isRange(nx, ny)) continue;
 
-                int nPos = ny*3 + nx;
+                int nPos = ny*3+nx;
                 char ch = pos.charAt(nPos);
                 String next = pos.replace(ch, 'c');
                 next = next.replace('0', ch);
@@ -61,3 +62,5 @@ public class Main {
         return x>=0 && y>=0 && x<3 && y<3;
     }
 }
+
+
