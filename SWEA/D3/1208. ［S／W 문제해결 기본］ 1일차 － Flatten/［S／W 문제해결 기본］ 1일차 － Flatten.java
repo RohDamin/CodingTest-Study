@@ -1,3 +1,4 @@
+// 배열, 정렬
 import java.util.*;
 import java.io.*;
 
@@ -15,30 +16,14 @@ class Solution {
             for (int i=0; i<100; i++) {
                 arr[i] = Integer.parseInt(st.nextToken());
             }
-
-            int depth;
-            while(true) {
-                int min = 101;
-                int minIdx = 0;
-                int max = -1;
-                int maxIdx = 0;
-                for (int i=0; i<100; i++) {
-                    if (arr[i] < min) {
-                        min = arr[i];
-                        minIdx = i;
-                    }
-                    if (arr[i] > max) {
-                        max = arr[i];
-                        maxIdx = i;
-                    }
-                }
-                depth = arr[maxIdx] - arr[minIdx];
-                if (depth<=1 || dump<=0) break;
-                arr[minIdx]++;
-                arr[maxIdx]--;
-                dump--;
+            ;
+            for (int i=0; i<dump; i++) {
+                Arrays.sort(arr);
+                arr[99]--;
+                arr[0]++;
             }
-            sb.append("#").append(t+1).append(" ").append(depth).append("\n");
+            Arrays.sort(arr);
+            sb.append("#").append(t+1).append(" ").append(arr[99]-arr[0]).append("\n");
         }
 
         System.out.println(sb);
