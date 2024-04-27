@@ -1,3 +1,7 @@
+/**
+ * knapsack Problem
+ * - 대표적인 DP 알고리즘
+ */
 import java.util.*;
 import java.io.*;
 
