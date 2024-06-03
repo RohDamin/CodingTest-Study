@@ -1,8 +1,7 @@
 people = 0
-max = 0
-for _ in range(0, 10):
+max_people = 0
+for _ in range(10):
     minus, plus = map(int, input().split())
-    people = people - minus + plus
-    if people > max:
-        max = people
-print(max)
+    people += plus - minus
+    max_people = max(people, max_people)
+print(max_people)
