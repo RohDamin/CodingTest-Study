@@ -1,13 +1,11 @@
 import sys
-dp = []
-dp.append(0)
-dp.append(1)
-n = int(sys.stdin.readline())
 
-if n == 1:
-    print(dp[n])
+N = int(sys.stdin.readline())
+dp = [0, 1]
+if N == 1:
+    print(1)
     exit()
 
-for i in range(2, n+2):
-    dp.append((dp[i-1]+dp[i-2])%10007)
-print(dp[n+1])
+for i in range(2, N + 2):
+    dp.append((dp[i - 2] + dp[i - 1]) % 10007)
+print(dp[N + 1])
