@@ -19,11 +19,9 @@ if (len(q) == 0):
     print(0)
     exit()
 
-cnt = 0
 while(len(q) != 0):
     pNode = q.pop()
     visited[pNode] = True
-    cnt += 1
     for value in graph[pNode]:
         if not visited[value] and value not in q:
             q.appendleft(value)
